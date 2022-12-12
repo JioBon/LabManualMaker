@@ -1,0 +1,38 @@
+{% extends "main/template.html" %}
+
+{% load static %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block body %}
+    <div>
+        <p>Full Name: {{ user }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Password: {{ user.password }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <input name="eprofile" value="EDIT PROFILE" type="submit">
+        </form>
+    </div>
+    <div>
+        <div>
+            <a href="{% url 'mainsite:editcourse' %}">Add Course</a>
+            {% for field in courses %}
+                <li>
+                    {{field.course}}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input name="{{field.course.course}}" value="DELETE" type="submit"/>
+                    </form>
+                </li>
+                {% empty %}
+                    <li>No Courses</li>
+            {% endfor %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

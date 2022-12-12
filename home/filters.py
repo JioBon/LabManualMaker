@@ -7,6 +7,6 @@ class LabFilter(django_filters.FilterSet):
         model = Lab_Manual
         fields = ['lab_name',
         'instructor',
-        'course_code',
+        'course',
         'activity_name',
         ]

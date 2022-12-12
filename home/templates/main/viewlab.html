@@ -1,0 +1,36 @@
+{% extends "main/template.html" %}
+
+{% load static %}
+
+{% block title %}
+    {{ labelements.lab_name }}
+{% endblock %}
+
+{% block body %}
+    <div>
+        <ul>
+            <li>Title: {{labelements.lab_name}}</li>
+            <li>Instructor: {{labelements.instructor}}</li>
+            <li>Course: {{labelements.course}}</li>
+            <li>Activity Name: {{labelements.activity_name}}</li>
+            <li>Activity Number: {{labelements.activity_no}}</li>
+            <li>Objectives: {{labelements.objectives | safe}}</li>
+            <li>Intended Learning Outcomes: {{labelements.ilo | safe}}</li>
+            <li>Discussion: {{labelements.discussion | safe}}</li>
+            <li>Resources: {{labelements.resources | safe}}</li>
+            <li>Procedure: {{labelements.procedure | safe}}</li>
+            <li>Results: {{labelements.results | safe}}</li>
+            <li>Supplementary Tasks: {{labelements.supplementary | safe}}</li>
+            <li>Obeservations: {{labelements.observation | safe}}</li>
+            <li>Conclusion: {{labelements.conclusion | safe}}</li>
+
+        </ul>
+    </div>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" name="editlab" value="EDIT THIS FILE" />
+            <input type="submit" name="teacherdownload" value="DOWNLOAD: TEACHER" />
+        </form>
+    </div>
+{% endblock %}

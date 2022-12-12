@@ -17,8 +17,21 @@
                 {% csrf_token %}
                 <label for="searched">Search: </label>
                 <input name="searched"  placeholder="Course / Topic / Instructor" />
-                <button type="submit">Search</button>
+                <input type="submit" value="Search" name="search" />
             </form>
         </div>
+    </div>
+    <div>
+        <ul>
+            {% for labmanual in labmanuals %}
+                <li>
+                    {{labmanual}}
+                    <button name="view" onclick="location.href ='{% url 'mainsite:viewlab' labmanual.id %}'">VIEW</button>
+                </li>
+                {% empty %}
+                    <li>No Lab Manual Found</li>
+            {% endfor %}
+        </ul>
+        
     </div>
 {% endblock %}

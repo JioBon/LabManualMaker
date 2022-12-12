@@ -8,47 +8,91 @@
 
 {% block body %}
     <style>
-        .idpic {
-            height: 100px;
+        *{
+            margin: auto;
+            padding: auto;
         }
-        #bodycontainer {
+        body{
+            background-color: aquamarine;
+            background: cover;
+        }
+        .bodycontainer {
             display: flex;
         }
-        .students {
+        #grouplogo{
+            width: 500px;
+            height: 500px;
+        }
+        .sub-container{
+            max-width: 1000px;
+            margin: auto;
+            padding: 48px 0;
             display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .students{
+            margin: 5px;
+            padding: 22px;
+            max-width: 30%;
+            cursor: pointer;
+            transition: 0.5s;
+            box-sizing: border-box;
+            background: #11b67f;
+            box-shadow:  14px 14px 3px #0a6d4c,
+                        -14px -14px 3px #18ffb2;
+            border-radius: 20px;
+            transition: all .3s;
+            border-radius: 0px;
+        }
+        .students:hover{
+            box-shadow: 0px 0px 30px 1px rgba(1, 36, 17, 0.3);
+        }
+        .students img{
+            width: 200px;
+            height: 200px;
+
+        }
+        .name{
+            text-align: center;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            text-decoration: uppercase;
         }
     </style>
-    <div id="bodycontainer">
+    <div class="bodycontainer">
         <div>
-            <img src="{% static 'images/group.png' %}" id="grouplogo" />
+            <img src="{% static 'images/logo.png' %}" id="grouplogo" />
         </div>
         <div>
-            <p>Laboratory Manual Maker</p>
             <p>Department of Computer Engineering</p>
             <p>BSCpE</p>
-            <ul>
-                <li class="students">
+
+            <div class="sub-container">
+                <div class="students">
                     <img src="{% static 'images/Bonifacio.jpg' %}" class="idpic" />
-                    <h2>J.C. Jeff Bonifacio</h2>
-                </li>
-                <li class="students">
+                    <h2 class="name">J.C. Jeff Bonifacio</h2>
+                </div>
+                <div class="students">
                     <img src="{% static 'images/Espela.jpg' %}" class="idpic" />
-                    <h2>Emerson Espela</h2>
-                </li>
-                <li class="students">
+                    <h2 class="name">Emerson Espela</h2>
+                </div>
+                <div class="students">
                     <img src="{% static 'images/Ortega.png' %}" class="idpic" />
-                    <h2>Jasper Ortega</h2>
-                </li>
-                <li class="students">
+                    <h2 class="name">Jasper Ortega</h2>
+                </div>
+                <div class="students">
                     <img src="{% static 'images/Reyes.jpg' %}" class="idpic" />
-                    <h2>Jhoanna Reyes</h2>
-                </li>
-                <li class="students">
+                    <h2 class="name">Jhoanna Reyes</h2>
+                </div>
+                <div class="students">
                     <img src="{% static 'images/Viernes.png' %}" class="idpic" />
-                    <h2>Kent Jan Viernes</h2>
-                </li>
-            </ul>
-            <p>Engr Jonathan Taylar</p>
+                    <h2 class="name">Kent Jan Viernes</h2>
+                </div>
+            </div>
+
+            <p>Dr. Jonathan Taylar</p>
             <p>Instructor</p>
         </div>
     </div>

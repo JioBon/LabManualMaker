@@ -14,8 +14,10 @@
             {% for field in form %}
                 <div>
                     <label for="{{field.label}}" onclick="showfield('{{field.label}}')">{{field.label}}</label>
-                    <div class="field" id="{{field.label}}">
+                    <div class="createfield" id="{{field.label}}">
+
                         {{field}}
+
                     </div>
                 </div>
                 <br>
@@ -26,7 +28,7 @@
         </form>
     </div>
     <style>
-        .field {
+        .createfield {
             display: none;
         }
     </style>

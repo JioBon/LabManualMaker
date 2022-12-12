@@ -7,6 +7,8 @@
             {% block title %}
             {% endblock %}
         </title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css" integrity="sha384-z4tVnCr80ZcL0iufVdGQSUzNvJsKjEtqYZjiQrrYKlpGow+btDHDfQWkFjoaz/Zr" crossorigin="anonymous">
         <style>
             #tiplogo {
                 height: 120px;
@@ -18,6 +20,9 @@
                 overflow: hidden;
                 background-color: greenyellow;
                 
+            }
+            .menu a{
+                font-size: 24px;
             }
             .menubar {
                 float:left;
@@ -61,6 +66,19 @@
                 font-size: 36px;
                 margin-left: 50px;
             }
+            .nav-links a::after{
+                content: '';
+                width: 0%;
+                height: 2px;
+                background: #000000;
+                display: block;
+                margin: auto;
+                transition: 0.5s;
+            }
+            .nav-links a:hover::after{
+                width: 100%;
+
+            }
 
 
         </style>
@@ -68,10 +86,10 @@
     <body>
         <div id="sidebar" class="sidenav">
             <a href="javascript:void(0)" class="closebtn sidecontent" onclick="closeNav() ">&times;</a>
-            <p class="sidecontent">Home</p>
-            <p class="sidecontent">Profile</p>
-            <p class="sidecontent">Settings</p>
-            <p class="sidecontent">Logout</p>
+            <a class="sidecontent" href="{% url 'mainsite:home' %}">Home</p>
+            <a class="sidecontent" href="{% url 'mainsite:profile' %}">Profile</p>
+            <a class="sidecontent" href="#">Settings</p>
+            <a class="sidecontent" href="{% url 'mainsite:userexit' %}">Logout</p>
         </div>
         <div id="menubar-container">
             <a href="{% url 'mainsite:home' %}">
@@ -79,11 +97,13 @@
             </a>
 
             <div id="menuright" class="menu">
+                <div class="nav-links" id="navLinks">
                 <a class="menubar" href="{% url 'mainsite:home' %}">Home</a>
                 <a class="menubar" href="{% url 'mainsite:newlab' %}">Create</a>
                 <a class="menubar" href="{% url 'mainsite:aboutus' %}">About Us</a>
                 <a class="menubar" href="{% url 'mainsite:contact' %}">Contact</a>
                 <img src="{% static 'images/account.png' %}" id="account" class="menubar" onclick="openNav()"/>
+                </div>
             </div>
                 
 
@@ -108,6 +128,18 @@
 
         
     </script>
+
+
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu(){
+            navLinks.style.right = "0";
+        }
+        function hideMenu(){
+            navLinks.style.right = "-200px";
+        }
+    </script>
+
 
 
 </html>

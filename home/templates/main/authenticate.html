@@ -10,15 +10,91 @@
             #tiplogo {
                 height: 200px;
             }
-            .authtype {
-                background-color: pink;
+            .hero{
+                height: 100%;
+                width: 100%;
+                background-position: center;
+                background-size: cover;
+                position: absolute;
             }
-            #login {
+            .form-box{
+                width: 380px;
+                height: 600px;
+                position: relative;
+                margin: 6% auto;
+                background: rgb(88, 238, 69);
+                padding: 5px;
+                overflow: hidden;
+            }
+            .button-box{
+                width: 220px;
+                margin: 35px auto;
+                position: relative;
+                box-shadow: 0 0 20px 9px #0835041f;
+                border-radius: 30px;
+            }
+            .authtype{
+                padding: 10px 30px;
+                cursor: pointer;
+                background: transparent;
+                border:  0;
+                outline:  none;
+                position: relative;
+    
+            }
+            #btn{
+                top: 0;
+                left: 0;
+                position: absolute;
+                width: 110px;
+                height: 100%;
+                background: linear-gradient(to right, #12441f,#09d635);
+                border-radius: 30px;
+                transition: 0.5s;
+    
+            }
+            .input-group{
+                top: 120px;
+                position: absolute;
+                width: 280px;
+                transition: 0.5s;
+            }
+            .submit-btn{
+                width: 85%;
+                padding: 10px 30px;
+                cursor: pointer;
                 display: block;
+                margin: auto;
+                background: linear-gradient(to left,  #12441f,#09d635);
+                border: 0;
+                outline: none;
+                border-radius: 30px;
             }
-            #register {
-                display: none;
+            .input-field{
+                width: 100%;
+                padding: 10px 0;
+                margin: 10px 0;
+                border-left: 0;
+                border-top: 0;
+                border-right: 0;
+                border-bottom: 1px solid #999;
+                outline: none;
+                background: transparent;
             }
+            span{
+                color: #777;
+                font-size: 12px;
+                bottom: 65px;
+                position: absolute;
+            }
+            #login{
+                left: 0;
+            }
+            #register{
+                left: 0px;
+                
+            }
+ 
         </style>
     </head>
     <body>
@@ -26,50 +102,60 @@
             <img src="{% static 'images/TIPLogo.png' %}" id="tiplogo" />
             <h1>Laboratory Manual Maker</h1>
         </header>
-        <div>
-            <h1 onclick="to_login()" class="authtype">Login</h1>
-            <h1 onclick="to_register()" class="authtype">Register</h1>
-            <div id="login">
-                <form method="POST">
-                    {% csrf_token %}
-                    <label for="email">Email: </label>
-                    <input required id="email" placeholder="email@example.com" type="email" />
-                    <label for="password">Password: </label>
-                    <input required id="password" placeholder="Password" type="password" />
+
+        <div class="hero">
+            <div class="form-box">
+                <div class="button-box">
+                    <div id="btn"></div>
+                    <button type="button" onclick="to_login()" class="authtype">Login</button>
+                    <button type="button" onclick="to_register()" class="authtype">Register</button>
+                </div> 
+
+                    <form class="input-group" id="login" method="POST">
+                        {% csrf_token %}
+                        <label for="email">Email: </label>
+                        <input class="input-field" required id="loginemail" placeholder="email@example.com" type="email" name="email" />
+                        <label for="password">Password: </label>
+                        <input class="input-field" required id="loginpassword" placeholder="Password" type="password" name="password"/>
+        
+                        <input class="submit-btn" type="submit" value="Login" id="Login" name="login-submit" />
+                    </form>
     
-                    <input type="submit" value="Login" id="Login" />
-                </form>
-            </div>
-            <div id="register">
-                <form method="POST">
-                    {% csrf_token %}
-                    <label for="fname">First Name: </label>
-                    <input required id="fname" placeholder="First Name"  />
-                    <label for="lname">Last Name: </label>
-                    <input required id="lname" placeholder="Last Name"  />
-                    <label for="email">Email: </label>
-                    <input required id="email" placeholder="email@example.com" type="email" />
-                    <label for="password">Password: </label>
-                    <input required id="password" placeholder="Password" type="password" />
-                    
-    
-                    <input type="submit" value="Register" id="Register" />
-                </form>
+                    <form class="input-group" id="register"method="POST">
+                        
+                        {% csrf_token %}
+                        {% for field in reg_form %}
+                            <p> {{field.label}}</p>
+                            <p> {{field}} </p>
+                        {% endfor %}
+                        
+                        <input class="submit-btn" type="submit" value="Register" id="Register" name="register-submit" />
+                    </form>
+                
+                {% for message in messages %}
+                    <p>{{message}}{{reg_form.errors}}</p>
+                {% endfor %}
             </div>
             
-            <p></p>
         </div>
 
         <script>
-            function to_login() {
-                document.getElementById("login").style.display = "block";
-                document.getElementById("register").style.display = "none";
+            var x = document.getElementById("login");
+            var y = document.getElementById("register");
+            var z = document.getElementById("btn");
+    
+            function to_register(){
+                x.style.left = "-400px";
+                y.style.left = "50px";
+                z.style.left = "110px";
             }
-            function to_register() {
-                document.getElementById("login").style.display = "none";
-                document.getElementById("register").style.display = "block";
+            function to_login(){
+                x.style.left = "50px";
+                y.style.left = "450px";
+                z.style.left = "0px";
             }
         </script>
+
     </body>
 
     

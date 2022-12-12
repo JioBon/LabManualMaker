@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'LabManual.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'labproject_db',
-        'USER': 'labadmin',
-        'PASSWORD': 'mylaboratory',
+        'NAME': 'labmanual2.1',
+        'USER': 'adminuser',
+        'PASSWORD': 'adminuser',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -106,6 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'home.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -126,4 +127,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static\images')
+TEMPLATE_ROOT = os.path.join(BASE_DIR, 'home\static\\templates')
