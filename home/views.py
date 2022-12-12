@@ -15,7 +15,6 @@ from .filters import LabFilter
 from .forms import *
 
 from docx import *
-from PyRTF import document, Renderer
 import os
 from django.conf import settings
 from django.http import HttpResponse, Http404
@@ -132,8 +131,6 @@ def TeacherDocument(request, pk):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_dir)
             print('gumana')
             return response
-
-    Renderer.Renderer.Write(os.path.join(settings.TEMPLATE_ROOT, f'{labmanual.lab_name}.rtf'))
 
     return redirect('mainsite:viewlab', pk=pk)
 
