@@ -7,44 +7,26 @@
 {% endblock %}
 
 {% block body %}
-    <div>
+<link rel="stylesheet" type="text/css" href="{% static 'css/createlab.css' %} ? {% now 'U' %}" />
+    <div class="cont">
         <form method="POST">
             {% csrf_token %}
             {{form.media}}
             {% for field in form %}
                 <div>
                     <label for="{{field.label}}" onclick="showfield('{{field.label}}')">{{field.label}}</label>
-                    <div class="createfield" id="{{field.label}}">
+                    <div class="createfield" id="{{field.label}}"> 
 
-                        {{field}}
+                        <p>{{field}} </p>
 
                     </div>
                 </div>
                 <br>
             {% endfor %}
-            
-            
-            <input id="submit" type="submit" name="newlab" />
+            <div class="submit">
+            <input id="submit" type="submit" name="newlab">
+            </div>
         </form>
     </div>
-    <style>
-        .createfield {
-            display: none;
-        }
-    </style>
-    <script>
-        function showfield(x){
-            if (document.getElementById(x).style.display === 'block') {
-                document.getElementById(x).style.display = 'none';
-            } else {
-                document.getElementById(x).style.display = 'block';
-            }
-            
-        }
-        
-    </script>
-
-    
-
 
 {% endblock %}

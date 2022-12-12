@@ -7,11 +7,17 @@
 {% endblock %}
 
 {% block body %}
-    <div>
+<link rel="stylesheet" type="text/css" href="{% static 'css/editprofile.css' %} ? {% now 'U' %}" />
+    <div class="cont">
+        <h1>Edit Profile</h1>
+        <div class="form">
+        <label>
         {% for field in form %}
-            {{field.label}}
+            <span>{{field.label}}</span>
             {{field}}
         {% endfor %}
+    </label>
+        </div>
     </div>
 
 {% endblock %}

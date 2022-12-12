@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+body{
+    background-color: #CEE5D0;
+    background: cover;
+}
+.cont{
+    align-items: center;
+    width: 10in;
+    height: auto;
+    padding: 10px 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    border-radius: 0px;
+    background: #e0e0e0;
+    box-shadow:  5px 5px 0px #5a5a5a,
+                -5px -5px 0px #ffffff;
+}
+.contentlabel{
+    width: auto;
+    height: auto;
+    padding: 10px 10px;
+    margin-bottom: 8px;
+    border-radius: 0px;
+    background: #ffffff;
+    box-shadow:  2px 2px 0px #5a5a5a,
+    -2px -2px 0px #ffffff;
+}
+input[type=submit]{
+    align-items: center;
+    background-color: #242a35;
+    border: none;
+    color: white;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.sub-cont{
+    text-align: center;
+    
+}
+.download-button {
+    margin-bottom: 5px;
+position: relative;
+border-width: 0;
+color: white;
+font-size: 15px;
+font-weight: 600;
+border-radius: 4px;
+z-index: 1;
+}
+
+.download-button .docs {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 10px;
+min-height: 40px;
+padding: 0 10px;
+border-radius: 4px;
+z-index: 1;
+background-color: #242a35;
+border: solid 1px #e8e8e82d;
+transition: all .5s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.download-button:hover {
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}

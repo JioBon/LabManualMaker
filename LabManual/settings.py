@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'LabManual.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'labmanual2.1',
-        'USER': 'adminuser',
-        'PASSWORD': 'adminuser',
+        'NAME': 'labproject_db',
+        'USER': 'labadmin',
+        'PASSWORD': 'mylaboratory',
         'HOST': 'localhost',
         'PORT': '3306',
     }

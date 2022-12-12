@@ -86,15 +86,24 @@ class Lab_Manual(models.Model):
     course = models.ForeignKey(CourseInstructor, on_delete=models.CASCADE, related_name="Courseinformation")
     activity_name = models.CharField(max_length=255)
     activity_no = models.FloatField()
-    objectives = RichTextField(blank=True, null=True)
-    ilo = RichTextField(blank=True, null=True)
-    discussion = RichTextField(blank=True, null=True)
-    resources = RichTextField(blank=True, null=True)
-    procedure =RichTextField(blank=True, null=True)
-    results = RichTextField(blank=True, null=True)
-    supplementary = RichTextField(blank=True, null=True)
-    observation = RichTextField(blank=True, null=True)
-    conclusion = RichTextField(blank=True, null=True)
+    objectives = models.TextField(blank=True, null=True)
+    ilo = models.TextField(blank=True, null=True)
+    discussion = models.TextField(blank=True, null=True)
+    resources = models.TextField(blank=True, null=True)
+    procedure =models.TextField(blank=True, null=True)
+    results = models.TextField(blank=True, null=True)
+    supplementary = models.TextField(blank=True, null=True)
+    observation = models.TextField(blank=True, null=True)
+    conclusion = models.TextField(blank=True, null=True)
+    # objectives = RichTextField(blank=True, null=True)
+    # ilo = RichTextField(blank=True, null=True)
+    # discussion = RichTextField(blank=True, null=True)
+    # resources = RichTextField(blank=True, null=True)
+    # procedure =RichTextField(blank=True, null=True)
+    # results = RichTextField(blank=True, null=True)
+    # supplementary = RichTextField(blank=True, null=True)
+    # observation = RichTextField(blank=True, null=True)
+    # conclusion = RichTextField(blank=True, null=True)
 
     def __str__(self):
         return f"Activity {self.activity_no} entitled {self.activity_name}"
@@ -104,4 +113,4 @@ class Sharing(models.Model):
     instructor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="SharedTo")
 
     def __str__(self):
-        return f"{self.LabManual.activity_name} is shared to {self.instructor.user}"
+        return f"{self.LabManual.activity_name} is shared to {self.instructor.__str__()}"

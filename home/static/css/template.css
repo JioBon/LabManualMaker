@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+#tiplogo {
+    height: 120px;
+}
+#account {
+    height: 90px;
+}
+#menubar-container {
+    overflow: hidden;
+    
+}
+.menu a{
+    font-size: 24px;
+}
+.menubar {
+    float:left;
+    color:black;
+    text-align: center;
+    padding: 14px 18px;
+    text-decoration: none;
+    font-size: 17px;
+}
+#menuright {
+    float: right;
+    position: relative;
+    
+}
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #86AB86;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.sidecontent {
+    margin-top: 10%;
+    text-decoration: none;
+    color: #000000;
+    display: block;
+    transition: 0.3s;
+}
+.closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 50px;
+    margin-left: 50px;
+}
+.nav-links a::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #000000;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+.nav-links a:hover::after{
+    width: 100%;
+}
+.sidenav a {
+    border-radius: 15px;
+    padding: 0.8em 1.8em;
+    border: 2px solid #06423c;
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 26px;
+    transition: .3s;
+    z-index: 1;
+    color: #ffffff;
+}
+.sidenav a::before {
+    content: '';
+    width: 0;
+    height: 300%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: #17C3B2;
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+}
+.sidenav a:hover::before {
+    width: 105%;
+}
+.sidenav a:hover {
+    color: #111;
+}

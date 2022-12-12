@@ -7,6 +7,60 @@
 {% endblock %}
 
 {% block body %}
-    The used to call me on a cellphone
+<link rel="stylesheet" type="text/css" href="{% static 'css/contact.css' %} ? {% now 'U' %}" />
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+<body>
+
+    <div class="container">
+        <h1>Connect With Us</h1>
+        <p>We would love to respond to your queries and help you succeed. Feel free to get in touch with us.</p>
+
+        <div class="contactbox">
+            <div class="sendreq">
+                <h2>Send Your Requests</h2>
+                <form>
+                    <div class="input-group">
+                    <label for="username">Name:</label>
+                    <input id="userinput" type="text" placeholder="Name" required><br>
+            
+                    <label for="useremail">Email:</label>
+                    <input id="userinput" type="email" placeholder="email@gmail.com"  requred><br>
+                    </div>
+
+                    <label for="usermessage">Message:</label>
+                    <textarea rows="6" placeholder="Message"></textarea><br>
+            
+                    <input id="submit" type="submit" value="Submit" >
+                    
+                </form>
+                
+            </div>
+
+            <div class="reachus">
+                <h2>Reach Us</h2>
+                <table>
+                    
+                    <tr>
+                        <td>Email:</td>
+                        <td>laboratorymanual.maker@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>Phone:</td>
+                        <td>09174814093</td>
+                    </tr>
+                    <tr>
+                        <td>Address:</td>
+                        <td>938 Aurora Boulevard, Cubao, Quezon City</td>
+                    </tr>
+    
+                </table>
+            
+        </div>
+
+        
+
+</body>
 
 {% endblock %}

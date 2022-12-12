@@ -7,37 +7,40 @@
 {% endblock %}
 
 {% block body %}
-    <div>
-        <h1>{{ user }}</h1>
-    </div>
-    <div>
-        <h1>Courses: </h1>
+<link rel="stylesheet" type="text/css" href="{% static 'css/editcourse.css' %} ? {% now 'U' %}" />
+    <div class="cont">
         <div>
-            <ul>
-                {% for field in courses %}
-                    <li>{{field.course}}</li>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <input name="{{field.course.course_code}}" value="DELETE" type="submit" />
-                    </form>
-                    {% empty %}
-                        <li>No Courses</li>
-                {% endfor %}
-                <li>
-                    <form method="POST">
-                        {% csrf_token %}
-                        {% for field in form %}
-                            {{field.label}}
-                            {{field}}
+            <h1>{{ user }}</h1>
+        </div>
+        <div>
+            <h1>Courses </h1>
+            <div class="form" >
+                <ul>
+                    {% for field in courses %}
+                        <li>{{field.course}}</li>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input name="{{field.course.course_code}}" value="DELETE" type="submit" />
+                        </form>
+                        {% empty %}
+                            <li>No Courses</li>
                         {% endfor %}
-                        <input type="submit" value="Add Course" name="addcourse" />
-                    </form>
-                    {% for message in messages %}
-                        <p>{{message}}</p>
-                    {% endfor %}
-                </li>
-            </ul>
-            
+                    <li>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                {{field.label}}
+                                {{field}}
+                            {% endfor %}
+                            <input type="submit" value="Add Course" name="addcourse" />
+                        </form>
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                    </li>
+                </ul>
+                
+            </div>
         </div>
     </div>
 {% endblock %}

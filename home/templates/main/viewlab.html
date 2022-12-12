@@ -7,30 +7,54 @@
 {% endblock %}
 
 {% block body %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/viewlab.css' %} ? {% now 'U' %}" />
+<div class="cont">
     <div>
         <ul>
-            <li>Title: {{labelements.lab_name}}</li>
-            <li>Instructor: {{labelements.instructor}}</li>
-            <li>Course: {{labelements.course}}</li>
-            <li>Activity Name: {{labelements.activity_name}}</li>
-            <li>Activity Number: {{labelements.activity_no}}</li>
-            <li>Objectives: {{labelements.objectives | safe}}</li>
-            <li>Intended Learning Outcomes: {{labelements.ilo | safe}}</li>
-            <li>Discussion: {{labelements.discussion | safe}}</li>
-            <li>Resources: {{labelements.resources | safe}}</li>
-            <li>Procedure: {{labelements.procedure | safe}}</li>
-            <li>Results: {{labelements.results | safe}}</li>
-            <li>Supplementary Tasks: {{labelements.supplementary | safe}}</li>
-            <li>Obeservations: {{labelements.observation | safe}}</li>
-            <li>Conclusion: {{labelements.conclusion | safe}}</li>
+            <p>Title: <div class="contentlabel">{{labelements.lab_name}}</div></p>
+            <p>Instructor:  <div class="contentlabel">{{labelements.instructor}}</div></p>
+            <p>Course: <div class="contentlabel">{{labelements.course}}</div></p>
+            <p>Activity Name: <div class="contentlabel">{{labelements.activity_name}}</div></p>
+            <p>Activity Number: <div class="contentlabel">{{labelements.activity_no | safe}}</div></p>
+            <p>Objectives: </p>
+                <div class="contentlabel">{{labelements.objectives | safe}}</div>
+            <p>Intended Learning Outcomes: </p>
+                <div class="contentlabel">{{labelements.ilo | safe}}</div>
+            <p>Discussion: </p>
+                <div class="contentlabel">{{labelements.discussion | safe}}</div>
+            <p>Resources:</p> 
+                <div class="contentlabel">{{labelements.resources | safe}}</div>
+            <p>Procedure:</p> 
+                <div class="contentlabel">{{labelements.procedure | safe}}</div>
+            <p>Results: </p>
+                <div class="contentlabel">{{labelements.results | safe}}</div>
+            <p>Supplementary Tasks: </p>
+                <div class="contentlabel">{{labelements.supplementary | safe}}</div>
+            <p>Obeservations: </p>
+                <div class="contentlabel">{{labelements.observation | safe}}</div>
+            <p>Conclusion: </p>
+                <div class="contentlabel">{{labelements.conclusion | safe}}</p>
 
         </ul>
     </div>
-    <div>
+    <div class="sub-cont">
         <form method="POST">
             {% csrf_token %}
-            <input type="submit" name="editlab" value="EDIT THIS FILE" />
-            <input type="submit" name="teacherdownload" value="DOWNLOAD: TEACHER" />
+            
+            <button class="download-button">
+                <div class="docs"><svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none" stroke-width="2" stroke="currentColor" height="20" width="20" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line y2="13" x2="8" y1="13" x1="16"></line><line y2="17" x2="8" y1="17" x1="16"></line><polyline points="10 9 9 9 8 9"></polyline></svg><input type="submit" name="editlab" value="EDIT" /></div> 
+            </button>
+            <button class="download-button">
+                <div class="docs"><svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none" stroke-width="2" stroke="currentColor" height="20" width="20" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line y2="13" x2="8" y1="13" x1="16"></line><line y2="17" x2="8" y1="17" x1="16"></line><polyline points="10 9 9 9 8 9"></polyline></svg> <input type="submit" name="teacherdownload" value="DOWNLOAD" /></div> 
+            </button>
         </form>
+        {% if request.user == labelements.instructor %}
+        <button class="download-button">
+            <div class="docs"><svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none" stroke-width="2" stroke="currentColor" height="20" width="20" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line y2="13" x2="8" y1="13" x1="16"></line><line y2="17" x2="8" y1="17" x1="16"></line><polyline points="10 9 9 9 8 9"></polyline></svg> <input type="submit" onclick="location.href ='{% url 'mainsite:sharinglist' labelements.id %}'" value="SHARE"/></div>
+        </button>
+         {% endif %}
     </div>
+</div>
+    
+
 {% endblock %}

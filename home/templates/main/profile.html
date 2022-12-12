@@ -7,32 +7,48 @@
 {% endblock %}
 
 {% block body %}
-    <div>
-        <p>Full Name: {{ user }}</p>
-        <p>Email: {{ user.email }}</p>
-        <p>Password: {{ user.password }}</p>
-        <form method="POST">
-            {% csrf_token %}
-            <input name="eprofile" value="EDIT PROFILE" type="submit">
-        </form>
-    </div>
-    <div>
-        <div>
-            <a href="{% url 'mainsite:editcourse' %}">Add Course</a>
-            {% for field in courses %}
-                <li>
-                    {{field.course}}
-                    <form method="POST">
-                        {% csrf_token %}
-                        <input name="{{field.course.course}}" value="DELETE" type="submit"/>
-                    </form>
-                </li>
-                {% empty %}
-                    <li>No Courses</li>
-            {% endfor %}
-            {% for message in messages %}
-                <p>{{message}}</p>
-            {% endfor %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %} ? {% now 'U' %}" />
+    <h1 class="headerprofile">Profile</h1>
+    <div class="userinfo-row">
+        <div class="editprofile-column profile-wrapper" style="background-color:#B7CDB7;">
+            <h2 class="account-txt">Account Settings</h2>
+            <p>Full Name: {{ user }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>Password: {{ user.password }}</p>
+            <form method="POST">
+                {% csrf_token %}
+                <!---- <input name="eprofile" value="EDIT PROFILE" type="submit"> ---->
+            </form>
+        </div>
+        
+        <div class="editcourse-column" style="background-color:#86AB86;">
+            <div class="courseDivisionContainer">
+                <div class="fixedHeaderContainer">
+                    <div class="fixed-header">
+                        <h2 class="course-txt">Courses</h2>
+                        <a href="{% url 'mainsite:editcourse' %}"><button class="icon-btn add-btn"><div class="add-icon"></div><div class="btn-txt">Add Course</div></button></a>
+                    </div>
+                </div>
+            </div>            
+            <div class="editCourseColumnContainer">
+                {% for field in courses %}
+                <div>
+                    <li>
+                        <p class="added-course">{{field.course}}</p>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input name="{{field.course.course_code}}" value="DELETE" type="submit"/>
+                        </form>
+                    </li>
+                </div>
+                    {% empty %}
+                        <li>No Courses</li>
+                {% endfor %}
+                
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

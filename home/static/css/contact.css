@@ -1,0 +1,126 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+.container{
+    width: 80%;
+    margin:50px auto;
+    
+}
+h1{
+    margin-top: 50px;
+    margin-right: 200px;
+    margin-left: 80px;
+    margin-bottom: 5px;
+    font-size: 30px;
+}
+
+p{
+    margin-left: 80px;
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+.contactbox{
+    background: #CEE5D0;
+    display: flex;
+}
+.sendreq{
+    flex-basis: 50%;
+    padding: 40px 150px;
+}
+.sendreq #userinput{
+    margin-bottom: 20px;
+    width: 50%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px;
+}
+textarea{
+    width: 90%;
+    border: 1px solid #ccc;
+    outline:none;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+label{
+    margin-bottom: 6px;
+    display: block;
+    font-size: 20px;
+}
+
+#submit{
+    background-color: #7FB77E;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+
+#submit:hover {background-color: #3e8e41}
+
+#submit:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+.sendreq h2{
+    font-size: 30px;
+}
+.reachus{
+    flex-basis: 40%;
+    padding: 80px;
+    background: #94B49F;
+    color: white;
+    font-size: 20px;
+    
+}
+.reachus h2{
+    font-size: 30px;
+    color: white;
+}
+tr td:first-child{
+    padding-right: 20px;
+}
+tr td{
+    padding-top: 20px;
+}
+.bg {
+        animation:slide 3s ease-in-out infinite alternate;
+        background-image: linear-gradient(-60deg, #F7EDDB 50%, #DFE8CC 50%);
+        bottom:0;
+        left:-50%;
+        opacity:.5;
+        position:fixed;
+        right:-50%;
+        top:0;
+        z-index:-1;
+    }
+    .bg2 {
+        animation-direction:alternate-reverse;
+        animation-duration:4s;
+    }
+
+    .bg3 {
+        animation-duration:5s;
+    }
+    @keyframes slide {
+        0% {
+            transform:translateX(-25%);
+        }
+        100% {
+            transform:translateX(25%);
+        }
+    }

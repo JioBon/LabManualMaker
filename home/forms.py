@@ -41,6 +41,14 @@ class NewLab(ModelForm):
     class Meta:
         model = Lab_Manual
         fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class':"createlabinput"})
 
     
+class ShareLab(ModelForm):
+    class Meta:
+        model = Sharing
+        fields = '__all__'
         

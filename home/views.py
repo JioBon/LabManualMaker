@@ -8,28 +8,106 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
+import requests
 
 from .models import *
 from .filters import LabFilter
 from .forms import *
 
 from docx import *
+from PyRTF import document, Renderer
 import os
 from django.conf import settings
 from django.http import HttpResponse, Http404
 from mailmerge import MailMerge
+from bs4 import BeautifulSoup
+from html.parser import HTMLParser
+from docxtpl import DocxTemplate, RichText
+from htmldocx import HtmlToDocx
 
+
+# Class for html parser
+# class DocumentHTMLParser(HTMLParser):
+#     def __init__(self, document):
+#         HTMLParser.__init__(self)
+#         self.document = document
+#         self.paragraph  = None
+#         self.run = None
+    
+#     def add_paragraph_and_feed(self, html):
+#         self.paragraph = self.document.add_paragraph()
+#         self.feed(html)
+
+#     def handle_starttag(self, tag, attrs):
+#         self.run = self.paragraph.add_run()
+
+#         if tag in ["ul"]:
+#             self.run.add_break()
+#         if tag in ["li"]:
+#             self.run.add_text(u'        \u2022    ')
+
+#     def handle_endtag(self, tag):
+#         if tag in ["li"]:
+#             self.run.add_break()
+    
+#     def handle_data(self, data):
+#         self.run.add_text(data)
 
 # Create your views here.
 # ----------------- Document Download ----------------- #
+
+# def testTeacherDocument(request, pk):
+#     user = request.user
+#     labmanual = Lab_Manual.objects.get(id=pk)
+
+#     template = os.path.join(settings.TEMPLATE_ROOT, 'labtemplate.docx')
+#     docxdocument = DocxTemplate(template)
+#     desc_document = Document()
+#     new_parser = HtmlToDocx()
+    
+#     new_parser.add_html_to_document(labmanual.objectives, desc_document)
+#     desc_document.save(os.path.join(settings.TEMPLATE_ROOT, f'subdoc.docx'))
+
+#     # doc_html_parser = DocumentHTMLParser(docxdocument)
+#     # test = doc_html_parser.add_paragraph_and_feed(labmanual.objectives)
+#     # print(test)
+
+#     sub_doc = docxdocument.new_subdoc(os.path.join(settings.TEMPLATE_ROOT, f'subdoc.docx'))
+
+#     context = {
+#         'objectives': sub_doc,
+
+#     }
+
+
+#     docxdocument.render(context)
+#     docxdocument.save(os.path.join(settings.TEMPLATE_ROOT, f'{labmanual.lab_name}.docx'))
+
+    
+#     # docxdocument.render(context)
+
+#     # docxdocument.write(os.path.join(settings.TEMPLATE_ROOT, f'{labmanual.lab_name}.docx'))
+
+#     file_dir = os.path.join(settings.TEMPLATE_ROOT, f'{labmanual.lab_name}.docx')
+#     if os.path.exists(file_dir):
+#         with open(file_dir, 'rb') as fh:
+#             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+#             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_dir)
+#             print('gumana')
+#             return response
+
+#     # Renderer.Renderer.Write(os.path.join(settings.TEMPLATE_ROOT, f'{labmanual.lab_name}.rtf'))
+
+#     return redirect('mainsite:viewlab', pk=pk)
+
 def TeacherDocument(request, pk):
     user = request.user
     labmanual = Lab_Manual.objects.get(id=pk)
 
     template = os.path.join(settings.TEMPLATE_ROOT, 'labtemplate.docx')
-    document = MailMerge(template)
+    docxdocument = MailMerge(template)
 
-    document.merge(
+    docxdocument.merge(
     title=f'{labmanual.activity_name}',
     actno=f'{labmanual.activity_no}',
     coursecode=f'{labmanual.course.course.course_code}',
@@ -45,8 +123,7 @@ def TeacherDocument(request, pk):
     observation=f'{labmanual.observation}',
     conclusion=f'{labmanual.conclusion}'
 )
-    document.write(os.path.join(settings.TEMPLATE_ROOT, f'{labmanual.lab_name}.docx'))
-    print(settings.TEMPLATE_ROOT)
+    docxdocument.write(os.path.join(settings.TEMPLATE_ROOT, f'{labmanual.lab_name}.docx'))
 
     file_dir = os.path.join(settings.TEMPLATE_ROOT, f'{labmanual.lab_name}.docx')
     if os.path.exists(file_dir):
@@ -55,6 +132,9 @@ def TeacherDocument(request, pk):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_dir)
             print('gumana')
             return response
+
+    Renderer.Renderer.Write(os.path.join(settings.TEMPLATE_ROOT, f'{labmanual.lab_name}.rtf'))
+
     return redirect('mainsite:viewlab', pk=pk)
 
 # ----------------- Authentication ----------------- #
@@ -118,16 +198,31 @@ def contact(request):
 
 @login_required(login_url='mainsite:login')
 def searchpage(request, pk):
+    user = request.user
+    # pk = pk.split()
+    sharinglist = Sharing.objects.filter(instructor=user)
+    shared=[]
+    # sharinglist = Sharing.objects.all()
+    
     if request.method == 'POST':
         searched = request.POST['searched']
 
         return redirect('mainsite:search', pk=searched)
 
-    labmanuals = Lab_Manual.objects.filter(Q(lab_name__icontains=pk) | Q(activity_name__icontains=pk))
+
+    labmanuals = Lab_Manual.objects.filter( (Q(lab_name__icontains=pk) | Q(activity_name__icontains=pk) | 
+        Q(course__course__course_code__icontains=pk) | 
+        Q(course__course__course_title__icontains=pk) | 
+        Q(instructor__first_name__icontains=pk) | 
+        Q(instructor__last_name__icontains=pk)))
+
+    for field in sharinglist:
+        shared.append(field.LabManual)
 
     return render(request, "main/search.html", {
         'searched': pk,
         'labmanuals': labmanuals,
+        'sharinglist': shared,
     })
 
 # ----------------- Profile ----------------- #
@@ -138,6 +233,7 @@ def profile(request):
     courselist = CourseInstructor.objects.filter(instructor=user)
 
     for i in courselist:
+        print(i.course.course_code, request.POST)
         if i.course.course_code in request.POST:
             delcourse = CourseInstructor.objects.get(instructor=user, course=i.course)
             delcourse.delete()
@@ -209,6 +305,15 @@ def createlab(request):
 def viewlab(request, pk):
     user = request.user
     labmanual = Lab_Manual.objects.get(id=pk)
+    uri = request.build_absolute_uri()
+    # print(uri)
+    # page = requests.get(uri)
+    # soup = BeautifulSoup(uri, "html.parser")
+    # print(soup)
+    # print("uri: ", uri)
+    # print("soup", soup)
+    # print("rtf data:", request.POST)
+    # test = soup.find("p")
     if 'editlab' in request.POST:
         return redirect('mainsite:editlab', pk=pk)
     if 'teacherdownload' in request.POST:
@@ -217,6 +322,38 @@ def viewlab(request, pk):
 
     context = {'labelements': labmanual}
     return render(request, 'main/viewlab.html', context)
+
+@login_required(login_url='mainsite:login')
+def sharedlab(request, pk):
+    user = request.user
+    labmanual = Lab_Manual.objects.get(id=pk)
+    shareform = ShareLab(initial={'LabManual':labmanual})
+    sharelist = Sharing.objects.filter(LabManual=labmanual)
+
+    if 'New-Share-Submit' in request.POST:
+        form = ShareLab(request.POST)
+        print(request.POST.get("instructor"))
+        if form.is_valid():
+            try:
+                checkCourse = Sharing.objects.get(instructor=request.POST.get("instructor"))
+            except ObjectDoesNotExist:
+                form.save()
+
+    for i in sharelist:
+        if i.instructor.__str__() in request.POST:
+            delcourse = Sharing.objects.get(instructor=i.instructor)
+            delcourse.delete()
+            messages.success(request, 'Course successfully Deleted')
+            sharelist = Sharing.objects.filter(LabManual=labmanual)
+    
+    context = {
+        'labelements': labmanual, 'sharingform': shareform, 'sharelist': sharelist
+    }
+    if labmanual.instructor == user:
+        return render(request, 'main/sharing.html', context)
+    else:
+        pass
+
 
 @login_required(login_url='mainsite:login')
 def editlab(request, pk):

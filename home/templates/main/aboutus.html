@@ -7,67 +7,18 @@
 {% endblock %}
 
 {% block body %}
-    <style>
-        *{
-            margin: auto;
-            padding: auto;
-        }
-        body{
-            background-color: aquamarine;
-            background: cover;
-        }
-        .bodycontainer {
-            display: flex;
-        }
-        #grouplogo{
-            width: 500px;
-            height: 500px;
-        }
-        .sub-container{
-            max-width: 1000px;
-            margin: auto;
-            padding: 48px 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .students{
-            margin: 5px;
-            padding: 22px;
-            max-width: 30%;
-            cursor: pointer;
-            transition: 0.5s;
-            box-sizing: border-box;
-            background: #11b67f;
-            box-shadow:  14px 14px 3px #0a6d4c,
-                        -14px -14px 3px #18ffb2;
-            border-radius: 20px;
-            transition: all .3s;
-            border-radius: 0px;
-        }
-        .students:hover{
-            box-shadow: 0px 0px 30px 1px rgba(1, 36, 17, 0.3);
-        }
-        .students img{
-            width: 200px;
-            height: 200px;
-
-        }
-        .name{
-            text-align: center;
-            padding: 12px;
-            font-weight: bold;
-            font-size: 16px;
-            text-decoration: uppercase;
-        }
-    </style>
+<link rel="stylesheet" type="text/css" href="{% static 'css/aboutus.css' %} ? {% now 'U' %}" />
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
     <div class="bodycontainer">
         <div>
             <img src="{% static 'images/logo.png' %}" id="grouplogo" />
         </div>
-        <div>
-            <p>Department of Computer Engineering</p>
-            <p>BSCpE</p>
+        <div class="header">
+            <h1>Technological Institute of the Philippines</h1>
+            <h2>Department of Computer Engineering</h2>
+            <h2>Bachelor of Science in Computer Engineering (BSCpE)</h2>
 
             <div class="sub-container">
                 <div class="students">
@@ -79,7 +30,7 @@
                     <h2 class="name">Emerson Espela</h2>
                 </div>
                 <div class="students">
-                    <img src="{% static 'images/Ortega.png' %}" class="idpic" />
+                    <img src="{% static 'images/Jasper.png' %}" class="idpic" />
                     <h2 class="name">Jasper Ortega</h2>
                 </div>
                 <div class="students">
@@ -90,10 +41,11 @@
                     <img src="{% static 'images/Viernes.png' %}" class="idpic" />
                     <h2 class="name">Kent Jan Viernes</h2>
                 </div>
+                <div class="students teacher">
+                    <img src="{% static 'images/DrTaylar.jpg' %}" class="idpic" />
+                    <h2 class="name">Dr. Jonathan Taylar</h2>
+                </div>
             </div>
-
-            <p>Dr. Jonathan Taylar</p>
-            <p>Instructor</p>
         </div>
     </div>
     

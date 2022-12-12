@@ -7,90 +7,19 @@
             {% block title %}
             {% endblock %}
         </title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css" integrity="sha384-z4tVnCr80ZcL0iufVdGQSUzNvJsKjEtqYZjiQrrYKlpGow+btDHDfQWkFjoaz/Zr" crossorigin="anonymous">
-        <style>
-            #tiplogo {
-                height: 120px;
-            }
-            #account {
-                height: 100px;
-            }
-            #menubar-container {
-                overflow: hidden;
-                background-color: greenyellow;
-                
-            }
-            .menu a{
-                font-size: 24px;
-            }
-            .menubar {
-                float:left;
-                color:black;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-                font-size: 17px;
-                text-align: baseline;
-            }
-            #menuright {
-                float: right;
-                position: relative;
-                
-            }
-
-            .sidenav {
-                height: 100%;
-                width: 0;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                right: 0;
-                background-color: green;
-                overflow-x: hidden;
-                transition: 0.5s;
-                padding-top: 60px;
-            }
-            .sidecontent {
-                padding: 8px 8px 8px 32px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-                transition: 0.3s;
-            }
-            .closebtn {
-                position: absolute;
-                top: 0;
-                right: 25px;
-                font-size: 36px;
-                margin-left: 50px;
-            }
-            .nav-links a::after{
-                content: '';
-                width: 0%;
-                height: 2px;
-                background: #000000;
-                display: block;
-                margin: auto;
-                transition: 0.5s;
-            }
-            .nav-links a:hover::after{
-                width: 100%;
-
-            }
-
-
-        </style>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+        <link rel="stylesheet" type="text/css" href="{% static 'css/template.css' %} ? {% now 'U' %}" />
     </head>
     <body>
         <div id="sidebar" class="sidenav">
             <a href="javascript:void(0)" class="closebtn sidecontent" onclick="closeNav() ">&times;</a>
-            <a class="sidecontent" href="{% url 'mainsite:home' %}">Home</p>
-            <a class="sidecontent" href="{% url 'mainsite:profile' %}">Profile</p>
-            <a class="sidecontent" href="#">Settings</p>
-            <a class="sidecontent" href="{% url 'mainsite:userexit' %}">Logout</p>
+            <a class="sidecontent" href="{% url 'mainsite:home' %}">Home</a>
+            <a class="sidecontent" href="{% url 'mainsite:profile' %}">Profile</a>
+            <a class="sidecontent" href="{% url 'mainsite:userexit' %}">Logout</a>
         </div>
+
         <div id="menubar-container">
             <a href="{% url 'mainsite:home' %}">
                 <img src="{% static 'images/TIPLogo.png' %}" id="tiplogo" class="menubar" />

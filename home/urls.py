@@ -23,6 +23,7 @@ urlpatterns = [
     path("create", views.createlab, name='newlab'),
     path("view/<str:pk>", views.viewlab, name='viewlab'),
     path("edit/<str:pk>", views.editlab, name='editlab'),
+    path("share/<str:pk>", views.sharedlab, name='sharinglist'),
 
     path("download/teacher/<str:pk>", views.TeacherDocument, name='teacherdownload'),
 ]
